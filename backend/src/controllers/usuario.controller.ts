@@ -1,5 +1,4 @@
 // src/controllers/userController.ts
-
 import { Request, Response } from 'express';
 import { UsuarioService } from '../services/usuario.service';
 import { Usuario } from '../models/usuario.model';
@@ -7,70 +6,62 @@ import { Usuario } from '../models/usuario.model';
 const usuarioService = new UsuarioService();
 
 export class UsuarioController {
-  // Crear un nuevo usuario
   static async createUser(req: Request, res: Response): Promise<void> {
     try {
-      const { name, email, password } = req.body;
+      const { nombre, correo, contrasena, tipo_usuario } = req.body;
       const newUser = new Usuario();
-      newUser.name = name;
-      newUser.email = email;
-      newUser.password = password;
+      newUser.nombre = nombre;
+      newUser.correo = correo;
+      newUser.contrasena = contrasena;
+      newUser.tipo_usuario = tipo_usuario;
 
       const savedUser = await usuarioService.save(newUser);
       res.status(201).json(savedUser);
     } catch (error) {
-      res.status(500).json({ message: 'Error creating user', error });
+      res.status(500).json({ message: 'Error al crear usuario', error });
     }
   }
 
-  // Obtener todos los usuarios
   static async getAllUsers(req: Request, res: Response): Promise<void> {
     try {
       const users = await usuarioService.findAll();
       res.status(200).json(users);
     } catch (error) {
-      res.status(500).json({ message: 'Error retrieving users', error });
+      res.status(500).json({ message: 'Error al obtener usuarios', error });
     }
   }
 
-  // Obtener un usuario por ID
   static async getUserById(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const user = await usuarioService.findById(Number(id));
+      const user = await usuarioService.findById(id);
       if (!user) {
-        res.status(404).json({ message: 'User not found' });
+        res.status(404).json({ message: 'Usuario no encontrado' });
         return;
       }
       res.status(200).json(user);
     } catch (error) {
-      res.status(500).json({ message: 'Error retrieving user', error });
+      res.status(500).json({ message: 'Error al obtener usuario', error });
     }
   }
 
-  // Actualizar un usuario por ID
   static async updateUser(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const updatedUser = await usuarioService.update(Number(id), req.body);
-      if (!updatedUser) {
-        res.status(404).json({ message: 'User not found' });
-        return;
-      }
+      const updatedUser = await usuarioService.update(id, req.body);
       res.status(200).json(updatedUser);
     } catch (error) {
-      res.status(500).json({ message: 'Error updating user', error });
+      res.status(500).json({ message: 'Error al actualizar usuario', error });
     }
   }
 
-  // Eliminar un usuario por ID
   static async deleteUser(req: Request, res: Response): Promise<void> {
     try {
       const { id } = req.params;
-      const deletedUser = await usuarioService.delete(Number(id));
-      res.status(200).json({ message: 'User deleted successfully', user: deletedUser });
+      const deletedUser = await usuarioService.delete(id);
+      res.status(200).json({ message: 'Usuario eliminado', usuario: deletedUser });
     } catch (error) {
-      res.status(500).json({ message: 'Error deleting user', error });
+      res.status(500).json({ message: 'Error al eliminar usuario', error });
     }
   }
 }

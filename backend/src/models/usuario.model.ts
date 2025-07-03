@@ -1,24 +1,31 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
-
-
+// src/models/usuario.model.ts
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+} from 'typeorm';
 
 @Entity('usuarios')
 export class Usuario {
-  @PrimaryGeneratedColumn()
-  id!: number;
+  @PrimaryGeneratedColumn('uuid')
+  id!: string;
 
-  @Column()
-  name!: string;
+  @Column({ type: 'text' })
+  nombre!: string;
 
-  @Column()
-  email!: string;
+  @Column({ type: 'text', unique: true })
+  correo!: string;
 
-  @Column()
-  password!: string;
+  @Column({ type: 'text' })
+  contrasena!: string;
 
-  @CreateDateColumn()
-  createdAt!: Date;
+  @Column({
+    type: 'text',
+    nullable: true,
+  })
+  tipo_usuario!: 'cliente' | 'instructor' | 'proveedor' | 'admin' | 'soporte';
 
-  @UpdateDateColumn()
-  updatedAt!: Date;
+  @CreateDateColumn({ name: 'fecha_creacion' })
+  fecha_creacion!: Date;
 }

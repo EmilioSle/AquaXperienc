@@ -1,5 +1,4 @@
 // src/services/userService.ts
-
 import { AppDataSource } from '../config/data-source';
 import { Usuario } from '../models/usuario.model';
 import { IUsuario } from '../interfaces/Iusuario';
@@ -9,50 +8,36 @@ export class UsuarioService implements IUsuario {
   private userRepository: Repository<Usuario>;
 
   constructor() {
-    // Inicializa el repositorio usando el DataSource
     this.userRepository = AppDataSource.getRepository(Usuario);
   }
 
-  // Obtener todos los usuarios
   async findAll(): Promise<Usuario[]> {
     return await this.userRepository.find();
   }
 
-  // Obtener un usuario por ID
-  async findById(id: number): Promise<Usuario | null> {
-    const user = await this.userRepository.findOneBy({ id });
-    return user || null;
+  async findById(id: string): Promise<Usuario | null> {
+    return await this.userRepository.findOneBy({ id });
   }
 
-  // Obtener un usuario por email
-  async findByEmail(email: string): Promise<Usuario | null> {
-    const user = await this.userRepository.findOneBy({ email });
-    return user || null;
+  async findByEmail(correo: string): Promise<Usuario | null> {
+    return await this.userRepository.findOneBy({ correo });
   }
 
-  // Crear un nuevo usuario
   async save(usuario: Usuario): Promise<Usuario> {
     return await this.userRepository.save(usuario);
   }
 
-  // Actualizar un usuario por ID
-  async update(id: number, usuario: Usuario): Promise<Usuario> {
+  async update(id: string, usuario: Usuario): Promise<Usuario> {
     const user = await this.userRepository.findOneBy({ id });
-    if (!user) {
-      throw new Error('User not found');
-    }
+    if (!user) throw new Error('Usuario no encontrado');
 
-    // Asigna los nuevos valores al usuario
     Object.assign(user, usuario);
     return await this.userRepository.save(user);
   }
 
-  // Eliminar un usuario por ID
-  async delete(id: number): Promise<Usuario> {
+  async delete(id: string): Promise<Usuario> {
     const user = await this.userRepository.findOneBy({ id });
-    if (!user) {
-      throw new Error('User not found');
-    }
+    if (!user) throw new Error('Usuario no encontrado');
 
     await this.userRepository.remove(user);
     return user;
