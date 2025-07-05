@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AquaXperience</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #0077c2;
+      --primary-light: #e0f3ff;
+      --background: #f8fafc;
+      --text: #1a1a1a;
+      --text-muted: #666;
+      --white: #ffffff;
+      --glass: rgba(255, 255, 255, 0.8);
+      --shadow: rgba(0, 0, 0, 0.1);
+      --border: #d0d7de;
+      --hover: #f1f5f9;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--background);
+      color: var(--text);
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
+
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      color: var(--primary);
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .logo img {
+      height: 28px;
+      margin-right: 10px;
+    }
+
+    ul.menu {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      flex-wrap: wrap;
+    }
+
+    ul.menu > li {
+      position: relative;
+    }
+
+    ul.menu > li > a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+      display: inline-block;
+    }
+
+    ul.menu > li:hover > a {
+      background-color: var(--primary-light);
+    }
+
+    .submenu {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background-color: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 20px var(--shadow);
+      border-radius: 12px;
+      min-width: 240px;
+      padding: 0.5rem 0;
+    }
+
+    .submenu a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--text);
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+      font-size: 0.95rem;
+    }
+
+    .submenu a:hover {
+      background-color: var(--hover);
+    }
+
+    ul.menu > li:hover .submenu {
+      display: block;
+    }
+
+    .icons {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 1.3rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    /* Selector idioma */
+    .language-select select {
+      padding: 0.25rem 0.5rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--white);
+      cursor: pointer;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+    }
+
+    main {
+      margin-top: 110px;
+      padding: 2rem;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    main h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    main p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      ul.menu {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+      }
+
+      .submenu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+        padding: 0;
+      }
+
+      .submenu a {
+        padding: 0.5rem 1rem;
+      }
+
+      ul.menu > li:hover .submenu {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="./png.ico" alt="Logo AquaXperience" style="height: 80px; width: auto;" />
+        AquaXperience
+      </div>
+
+      <ul class="menu">
+        <li>
+          <a href="#">Inicio</a>
+          <div class="submenu">
+            <a href="#">Dashboard</a>
+            <a href="#">Vista general</a>
+            <a href="#">Novedades</a>
+          </div>
+        </li>
+        <li>
+          <a href="#">Buscar</a>
+          <div class="submenu">
+            <a href="#">Buscar clases</a>
+            <a href="#">Buscar alquileres</a>
+            <a href="#">Buscar instructores</a>
+          </div>
+        </li>
+        <li>
+          <a href="#">Menú</a>
+          <div class="submenu">
+            <a href="#">Perfil y Preferencias</a>
+            <a href="#">Notificaciones</a>
+            <a href="#">Ayuda contextual</a>
+            <a href="#">Feedback / Soporte</a>
+          </div>
+        </li>
+        <li>
+          <a href="#">Alquiler</a>
+          <div class="submenu">
+            <a href="#">Ver equipos</a>
+            <a href="#">Solicitar alquiler</a>
+            <a href="#">Historial</a>
+          </div>
+        </li>
+        <li>
+          <a href="#">Instructores</a>
+          <div class="submenu">
+            <a href="#">Ver instructores</a>
+            <a href="#">Contactar</a>
+            <a href="#">Calificaciones</a>
+          </div>
+        </li>
+      </ul>
+
+      <div class="icons">
+        <span title="Notificaciones">🔔</span>
+        <span title="Perfil de usuario">👤</span>
+      </div>
+
+      <div class="language-select">
+        <select id="languageSwitcher" aria-label="Seleccionar idioma">
+          <option value="es" selected>Español</option>
+          <option value="en">English</option>
+        </select>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Bienvenido a AquaXperience</h1>
+    <p>Explora las funciones desde el menú superior. Todas las secciones están organizadas y accesibles.</p>
+  </main>
+
+  <script>
+    const texts = {
+      es: {
+        logoText: "AquaXperience",
+        menuInicio: "Inicio",
+        submenuInicio: ["Dashboard", "Vista general", "Novedades"],
+        menuBuscar: "Buscar",
+        submenuBuscar: ["Buscar clases", "Buscar alquileres", "Buscar instructores"],
+        menuMenu: "Menú",
+        submenuMenu: ["Perfil y Preferencias", "Notificaciones", "Ayuda contextual", "Feedback / Soporte"],
+        menuAlquiler: "Alquiler",
+        submenuAlquiler: ["Ver equipos", "Solicitar alquiler", "Historial"],
+        menuInstructores: "Instructores",
+        submenuInstructores: ["Ver instructores", "Contactar", "Calificaciones"],
+        notificaciones: "Notificaciones",
+        perfil: "Perfil de usuario",
+        mainTitle: "Bienvenido a AquaXperience",
+        mainParagraph: "Explora las funciones desde el menú superior. Todas las secciones están organizadas y accesibles."
+      },
+      en: {
+        logoText: "AquaXperience",
+        menuInicio: "Home",
+        submenuInicio: ["Dashboard", "Overview", "News"],
+        menuBuscar: "Search",
+        submenuBuscar: ["Search classes", "Search rentals", "Search instructors"],
+        menuMenu: "Menu",
+        submenuMenu: ["Profile & Preferences", "Notifications", "Contextual Help", "Feedback / Support"],
+        menuAlquiler: "Rentals",
+        submenuAlquiler: ["View equipment", "Request rental", "History"],
+        menuInstructores: "Instructors",
+        submenuInstructores: ["View instructors", "Contact", "Ratings"],
+        notificaciones: "Notifications",
+        perfil: "User profile",
+        mainTitle: "Welcome to AquaXperience",
+        mainParagraph: "Explore the features from the top menu. All sections are organized and accessible."
+      }
+    };
+
+    function changeLanguage(lang) {
+      // Cambiar texto logo (consideramos que el texto es el nodo 2 después del img)
+      document.querySelector('.logo').childNodes.forEach(node => {
+        if(node.nodeType === 3) node.nodeValue = ''; // limpiar texto
+      });
+      document.querySelector('.logo').appendChild(document.createTextNode(" " + texts[lang].logoText));
+
+      const menuItems = document.querySelectorAll('ul.menu > li');
+
+      // Menú Inicio
+      menuItems[0].querySelector('a').textContent = texts[lang].menuInicio;
+      const submenuInicioLinks = menuItems[0].querySelectorAll('.submenu a');
+      texts[lang].submenuInicio.forEach((text, i) => {
+        submenuInicioLinks[i].textContent = text;
+      });
+
+      // Menú Buscar
+      menuItems[1].querySelector('a').textContent = texts[lang].menuBuscar;
+      const submenuBuscarLinks = menuItems[1].querySelectorAll('.submenu a');
+      texts[lang].submenuBuscar.forEach((text, i) => {
+        submenuBuscarLinks[i].textContent = text;
+      });
+
+      // Menú Menú
+      menuItems[2].querySelector('a').textContent = texts[lang].menuMenu;
+      const submenuMenuLinks = menuItems[2].querySelectorAll('.submenu a');
+      texts[lang].submenuMenu.forEach((text, i) => {
+        submenuMenuLinks[i].textContent = text;
+      });
+
+      // Menú Alquiler
+      menuItems[3].querySelector('a').textContent = texts[lang].menuAlquiler;
+      const submenuAlquilerLinks = menuItems[3].querySelectorAll('.submenu a');
+      texts[lang].submenuAlquiler.forEach((text, i) => {
+        submenuAlquilerLinks[i].textContent = text;
+      });
+
+      // Menú Instructores
+      menuItems[4].querySelector('a').textContent = texts[lang].menuInstructores;
+      const submenuInstructoresLinks = menuItems[4].querySelectorAll('.submenu a');
+      texts[lang].submenuInstructores.forEach((text, i) => {
+        submenuInstructoresLinks[i].textContent = text;
+      });
+
+      // Títulos íconos
+      const icons = document.querySelectorAll('.icons span');
+      icons[0].title = texts[lang].notificaciones;
+      icons[1].title = texts[lang].perfil;
+
+      // Contenido principal
+      document.querySelector('main h1').textContent = texts[lang].mainTitle;
+      document.querySelector('main p').textContent = texts[lang].mainParagraph;
+    }
+
+    document.getElementById('languageSwitcher').addEventListener('change', (e) => {
+      changeLanguage(e.target.value);
+      localStorage.setItem('selectedLanguage', e.target.value);
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedLang = localStorage.getItem('selectedLanguage') || 'es';
+      document.getElementById('languageSwitcher').value = savedLang;
+      changeLanguage(savedLang);
+    });
+  </script>
+</body>
+</html>

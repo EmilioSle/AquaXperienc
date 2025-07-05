@@ -1,35 +1,37 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../../lib/supabaseClient';
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [correo, setCorreo] = useState('');
-  const [contrasena, setContrasena] = useState('');
-  const [error, setError] = useState('');
+  const [form, setForm] = useState({
+    correo: '',
+    contrasena: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
 
     try {
-      const response = await fetch('http://localhost:5000/api/users'); // Puedes ajustar esto
-      const usuarios = await response.json();
+      // Iniciar sesión con Supabase Auth
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: form.correo,
+        password: form.contrasena,
+      });
 
-      const user = usuarios.find(
-        (u: any) => u.correo === correo && u.contrasena === contrasena
-      );
+      if (error) throw error;
 
-      if (!user) {
-        setError('Correo o contraseña incorrectos');
-        return;
-      }
+      console.log('Sesión iniciada:', data.session);
+      console.log('Usuario:', data.user);
 
-      // Guardar en localStorage y redirigir según tipo
-      localStorage.setItem('usuario', JSON.stringify(user));
-      navigate('/begin');
-    } catch (err) {
-      console.error(err);
-      setError('Error en el servidor');
+      alert('Inicio de sesión exitoso');
+      navigate('/'); // Redirige donde quieras
+    } catch (error: any) {
+      alert('Error al iniciar sesión: ' + error.message);
     }
   };
 
@@ -37,26 +39,21 @@ const LoginPage = () => {
     <div style={{ padding: 40 }}>
       <h2>Iniciar Sesión</h2>
       <form onSubmit={handleLogin}>
-        <div>
-          <label>Correo:</label>
-          <input
-            type="email"
-            value={correo}
-            onChange={(e) => setCorreo(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Contraseña:</label>
-          <input
-            type="password"
-            value={contrasena}
-            onChange={(e) => setContrasena(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Entrar</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <input
+          type="email"
+          name="correo"
+          placeholder="Correo"
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          name="contrasena"
+          placeholder="Contraseña"
+          onChange={handleChange}
+          required
+        />
+        <button type="submit">Ingresar</button>
       </form>
     </div>
   );

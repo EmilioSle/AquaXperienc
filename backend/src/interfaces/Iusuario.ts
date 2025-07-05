@@ -1,4 +1,3 @@
-// src/interfaces/Iusuario.ts
 import { Usuario } from "../models/usuario.model";
 
 export interface IUsuario {
@@ -8,4 +7,7 @@ export interface IUsuario {
   save(usuario: Usuario): Promise<Usuario>;
   update(id: string, usuario: Usuario): Promise<Usuario>;
   delete(id: string): Promise<Usuario>;
+
+  // Validar credenciales (correo + contraseña)
+  validateUser(correo: string, contrasena: string): Promise<Usuario | null>;
 }

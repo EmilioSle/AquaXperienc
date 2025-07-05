@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../../lib/supabaseClient';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    nombre: '',
     correo: '',
     contrasena: '',
-    tipo_usuario: 'cliente',
+    nombre: '',
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -18,19 +18,35 @@ const RegisterPage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/api/users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+      // 1. Registrar usuario en Supabase Auth
+      const { data, error } = await supabase.auth.signUp({
+        email: form.correo,
+        password: form.contrasena,
       });
 
-      if (!response.ok) {
-        throw new Error('Error al registrar');
-      }
+      if (error) throw error;
 
+      console.log('Usuario registrado en Auth:', data.user);
+
+      const userId = data.user?.id;
+
+      if (!userId) throw new Error('No se pudo obtener el ID del usuario.');
+
+      // 2. Insertar datos adicionales en la tabla usuarios con tipo_usuario fijo 'cliente'
+      const { error: insertError } = await supabase.from('usuarios').insert([
+        {
+          id: userId, // ID generado en Auth (foreign key)
+          nombre: form.nombre,
+          tipo_usuario: 'cliente', // siempre cliente
+        },
+      ]);
+
+      if (insertError) throw insertError;
+
+      alert('Registro exitoso. Revisa tu correo para confirmar tu cuenta.');
       navigate('/login');
-    } catch (error) {
-      alert('Error al registrar: ' + error);
+    } catch (error: any) {
+      alert('Error al registrar: ' + error.message);
     }
   };
 
@@ -38,16 +54,28 @@ const RegisterPage = () => {
     <div style={{ padding: 40 }}>
       <h2>Registro</h2>
       <form onSubmit={handleRegister}>
-        <input name="nombre" placeholder="Nombre" onChange={handleChange} required />
-        <input type="email" name="correo" placeholder="Correo" onChange={handleChange} required />
-        <input type="password" name="contrasena" placeholder="Contraseña" onChange={handleChange} required />
-        <select name="tipo_usuario" onChange={handleChange}>
-          <option value="cliente">Cliente</option>
-          <option value="instructor">Instructor</option>
-          <option value="proveedor">Proveedor</option>
-          <option value="admin">Admin</option>
-          <option value="soporte">Soporte</option>
-        </select>
+        <input
+          type="text"
+          name="nombre"
+          placeholder="Nombre"
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="email"
+          name="correo"
+          placeholder="Correo"
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="password"
+          name="contrasena"
+          placeholder="Contraseña"
+          onChange={handleChange}
+          required
+        />
+        {/* Se elimina el select para tipo_usuario */}
         <button type="submit">Registrar</button>
       </form>
     </div>
