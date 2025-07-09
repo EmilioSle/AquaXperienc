@@ -65,60 +65,54 @@ export default function RegisterPage() {
           value={nombres}
           onChange={(e) => setNombres(e.target.value)}
           required
-        /><br />
-
+        />
         <input
           type="text"
           placeholder="Apellido"
           value={apellidos}
           onChange={(e) => setApellidos(e.target.value)}
           required
-        /><br />
-
+        />
         <input
           type="tel"
           placeholder="Teléfono"
           value={celular}
           onChange={(e) => setCelular(e.target.value)}
           required
-        /><br />
-
+        />
         <input
           type="email"
           placeholder="Correo"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-        /><br />
-
+        />
         <input
-          type={mostrarPassword ? 'text' : 'password'}
+          type={mostrarPassword ? "text" : "password"}
           placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-        /><br />
-
+        />
         <input
-          type={mostrarPassword ? 'text' : 'password'}
+          type={mostrarPassword ? "text" : "password"}
           placeholder="Confirmar contraseña"
           value={confirmar}
           onChange={(e) => setConfirmar(e.target.value)}
           required
-        /><br />
-
-        <label style={{ fontSize: '0.9rem' }}>
+        />
+        <label className="show-password-label">
           <input
             type="checkbox"
             checked={mostrarPassword}
             onChange={() => setMostrarPassword(!mostrarPassword)}
           />
-          {' '}Mostrar contraseñas
-        </label><br />
-
+          Mostrar contraseñas
+        </label>
         <button type="submit">Registrarse</button>
       </form>
-      <p>{message}</p>
+      <p className="message">{message}</p>
     </div>
+
   )
 }
