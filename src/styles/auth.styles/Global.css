@@ -1,35 +1,36 @@
-/* -------------------------------------------
-   GLOBAL STYLESHEET FOR AQUAXPERIENC
-   Experiencias Marinas, Alquiler y Venta de Equipo
--------------------------------------------- */
 
-/* -------------------------------------------
+/* ============================================================
+   GLOBAL STYLESHEET FOR AQUAXPERIENCE
+   Experiencias Marinas, Alquiler y Venta de Equipo
+   ============================================================ */
+
+/* ------------------------------
    1. Paleta de colores y variables CSS
--------------------------------------------- */
+------------------------------ */
 :root {
-  --primary-dark: #00334E;     /* Azul marino profundo: base para header/footer */
-  --primary-light: #00B7C2;    /* Turquesa vibrante: botones, enlaces, elementos destacados */
-  --accent-light: #ADE8F4;     /* Azul claro del mar: fondos suaves o secciones destacadas */
-  --background: #F5FAFA;       /* Blanco espuma: fondo principal de la página */
-  --accent-coral: #FFA07A;     /* Coral/Arena: acento para hover o botones secundarios */
-  --text-dark: #1E1E1E;        /* Color oscuro: texto principal para buena legibilidad */
-  --text-light: #ffffff;       /* Blanco puro: para textos sobre fondo oscuro */
-  --border-radius: 8px;        /* Bordes redondeados para tarjetas, botones, inputs */
-  --transition-speed: 0.3s;    /* Velocidad de animaciones */
+  --primary-dark: #00334E;
+  --primary-light: #00B7C2;
+  --accent-light: #ADE8F4;
+  --background: #F5FAFA;
+  --accent-coral: #FFA07A;
+  --text-dark: #1E1E1E;
+  --text-light: #ffffff;
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
 }
 
-/* -------------------------------------------
-   2. Reset básico para todos los elementos
--------------------------------------------- */
+/* ------------------------------
+   2. Reset básico
+------------------------------ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* -------------------------------------------
-   3. Estilos base del body
--------------------------------------------- */
+/* ------------------------------
+   3. Tipografía y cuerpo
+------------------------------ */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: var(--background);
@@ -37,9 +38,9 @@ body {
   line-height: 1.6;
 }
 
-/* -------------------------------------------
+/* ------------------------------
    4. Enlaces
--------------------------------------------- */
+------------------------------ */
 a {
   color: var(--primary-light);
   text-decoration: none;
@@ -47,29 +48,12 @@ a {
 }
 
 a:hover {
-  color: var(--accent-coral); /* Cambio a coral al pasar el mouse */
+  color: var(--accent-coral);
 }
 
-/* -------------------------------------------
-   5. Header / Navegación principal
--------------------------------------------- */
-header {
-  background-color: var(--primary-dark);
-  color: var(--text-light);
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-nav a {
-  margin-left: 1.5rem;
-  font-weight: bold;
-}
-
-/* -------------------------------------------
-   6. Botones (CTA, formularios, etc.)
--------------------------------------------- */
+/* ------------------------------
+   5. Botones
+------------------------------ */
 button {
   background-color: var(--primary-light);
   color: var(--text-light);
@@ -84,16 +68,82 @@ button:hover {
   background-color: var(--accent-coral);
 }
 
-/* -------------------------------------------
-   7. Secciones generales
--------------------------------------------- */
+/* ------------------------------
+   6. Header y navegación
+------------------------------ */
+.main-header {
+  background-color: var(--primary-dark);
+  color: var(--text-light);
+  padding: 1rem 2rem;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-menu a {
+  color: var(--text-light);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color var(--transition-speed);
+}
+
+.nav-menu a:hover {
+  color: var(--accent-coral);
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ------------------------------
+   7. Responsive navegación
+------------------------------ */
+@media (max-width: 768px) {
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
+/* ------------------------------
+   8. Secciones generales
+------------------------------ */
 section {
   padding: 3rem 2rem;
 }
 
-/* -------------------------------------------
-   8. Sección principal tipo "hero"
--------------------------------------------- */
+/* ------------------------------
+   9. Hero principal
+------------------------------ */
 .hero {
   background: linear-gradient(to bottom, var(--accent-light), var(--background));
   text-align: center;
@@ -110,24 +160,52 @@ section {
   color: var(--primary-dark);
 }
 
-/* -------------------------------------------
-   9. Tarjetas de contenido (servicios, instructores, etc.)
--------------------------------------------- */
+/* ------------------------------
+   10. Tarjetas
+------------------------------ */
 .card {
   background-color: #ffffff;
   border-radius: var(--border-radius);
-  box-shadow: 0 4px 8px rgba(0, 51, 78, 0.1); /* Sombra sutil para profundidad */
+  box-shadow: 0 4px 8px rgba(0, 51, 78, 0.1);
   padding: 1.5rem;
   transition: transform var(--transition-speed);
 }
 
 .card:hover {
-  transform: scale(1.03); /* Efecto zoom suave al pasar el mouse */
+  transform: scale(1.03);
 }
 
-/* -------------------------------------------
-   10. Pie de página (footer)
--------------------------------------------- */
+/* ------------------------------
+   11. Dashboard
+------------------------------ */
+.dashboard-main {
+  padding: 4rem 2rem;
+  text-align: center;
+  background-color: var(--background);
+}
+
+.dashboard-main h1 {
+  font-size: 3rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.dashboard-main p {
+  font-size: 1.25rem;
+  color: var(--text-dark);
+  margin-bottom: 3rem;
+}
+
+.dashboard-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+/* ------------------------------
+   12. Footer
+------------------------------ */
 .footer {
   background-color: var(--primary-dark);
   color: var(--text-light);
@@ -136,9 +214,9 @@ section {
   margin-top: 4rem;
 }
 
-/* -------------------------------------------
-   11. FORMULARIOS CENTRADOS EN PANTALLA
--------------------------------------------- */
+/* ------------------------------
+   13. Formularios
+------------------------------ */
 .form-wrapper {
   display: flex;
   align-items: center;
@@ -199,7 +277,6 @@ section {
   background-color: var(--accent-coral);
 }
 
-/* Nuevo: Label para mostrar contraseña */
 .show-password-label {
   font-size: 0.9rem;
   display: flex;
@@ -208,10 +285,110 @@ section {
   cursor: pointer;
 }
 
-/* Nuevo: Mensaje de error o info */
 .form-container .message {
   text-align: center;
   color: #d32f2f;
   font-size: 0.95rem;
   margin-top: 0.5rem;
+}
+
+.search-section {
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 51, 78, 0.1);
+}
+
+.search-results {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 600px;
+  text-align: left;
+}
+
+.search-results li {
+  background-color: #fff;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px rgba(0, 51, 78, 0.1);
+  transition: background-color var(--transition-speed);
+}
+
+.search-results li:hover {
+  background-color: var(--accent-light);
+}
+
+
+.search-section {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 51, 78, 0.1);
+}
+
+.search-results {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 600px;
+  text-align: left;
+}
+
+.search-results li {
+  background-color: #fff;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 6px rgba(0, 51, 78, 0.1);
+}
+
+
+
+.experiencia-alternada {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0;
+  gap: 2rem;
+}
+
+.experiencia-alternada img {
+  width: 50%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.experiencia-texto {
+  width: 50%;
+}
+
+@media (max-width: 768px) {
+  .experiencia-alternada {
+    flex-direction: column;
+  }
+
+  .experiencia-alternada img,
+  .experiencia-texto {
+    width: 100%;
+  }
 }
