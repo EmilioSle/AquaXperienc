@@ -77,27 +77,30 @@ useEffect(() => {
         return;
       }
 
-      if (currentUser.role !== 'USUARIO') {
-        navigate('../../auth/login');
-        return;
-      }
-
       const { data: perfil, error: perfilError } = await supabase
         .from('usuarios')
-        .select('correo')
+        .select('correo, rol')
         .eq('id', currentUser.id)
         .single();
 
       if (perfilError || !perfil) {
         console.warn('Usuario no autorizado:', perfilError);
         navigate('../../auth/login');
-      } else {
-        setIsAuthorized(true);
+        return;
       }
+
+      if (perfil.rol !== 'USUARIO') {
+        navigate('../../auth/login');
+        return;
+      }
+
+      setIsAuthorized(true);
     };
 
     checkUser();
   }, [navigate]);
+
+
 
   if (isAuthorized === null) return <p>Cargando...</p>;
 
