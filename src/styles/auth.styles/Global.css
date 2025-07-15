@@ -566,3 +566,45 @@ section {
   font-size: 1.1rem;
   margin-top: 5px;
 }
+
+.profile-menu-container {
+  position: relative;
+  display: inline-block;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.profile-icon {
+  font-size: 1.8rem;
+  color: #fff;
+  margin-left: 1rem;
+}
+
+.profile-dropdown {
+  position: absolute;
+  right: 0;
+  top: 2.5rem;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+.profile-dropdown a,
+.profile-dropdown button {
+  display: block;
+  padding: 0.5rem;
+  text-align: left;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.profile-dropdown a:hover,
+.profile-dropdown button:hover {
+  background-color: #f0f0f0;
+}

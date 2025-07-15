@@ -16,6 +16,8 @@ function App() {
         <Route path="/auth/register" element={<RegisterPage />} />
         <Route path="/dashboard/coach" element={<CoachDashboard />} />
         <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/user/perfil" element={<DashboardPage />} />
+        {/* Add more routes as needed */}
 
       </Routes>
     </BrowserRouter>

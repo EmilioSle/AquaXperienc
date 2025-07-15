@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 import { supabase } from '../../config/supabase';
 import '../../styles/auth.styles/Global.css'
 import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -10,6 +11,26 @@ export default function DashboardPage() {
   const [query, setQuery] = useState('');
   const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
   const navigate = useNavigate();
+
+const [showProfileMenu, setShowProfileMenu] = useState(false);
+const profileRef = useRef(null);
+
+const handleLogout = async () => {
+  await supabase.auth.signOut();
+  navigate('/auth/login');
+};
+
+useEffect(() => {
+  const handleClickOutside = (event: MouseEvent) => {
+    if (profileRef.current && !(profileRef.current as any).contains(event.target)) {
+      setShowProfileMenu(false);
+    }
+  };
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => {
+    document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, []);
 
   const experiencias = [
     {
@@ -56,7 +77,7 @@ export default function DashboardPage() {
         return;
       }
 
-      if (currentUser.role === 'coach') {
+      if (currentUser.role !== 'USUARIO') {
         navigate('../../auth/login');
         return;
       }
@@ -69,7 +90,7 @@ export default function DashboardPage() {
 
       if (perfilError || !perfil) {
         console.warn('Usuario no autorizado:', perfilError);
-        navigate('/login');
+        navigate('../../auth/login');
       } else {
         setIsAuthorized(true);
       }
@@ -110,6 +131,20 @@ export default function DashboardPage() {
             <a href="#"><i className="fas fa-calendar-check"></i> Reservas</a>
             <a href="#"><i className="fas fa-suitcase-rolling"></i> Alquiler</a>
             <a href="#"><i className="fas fa-chalkboard-teacher"></i> Instructores</a>
+
+<div className="profile-menu-container" ref={profileRef}>
+  <i
+    className="fas fa-user-circle profile-icon"
+    onClick={() => setShowProfileMenu(!showProfileMenu)}
+    title="Perfil"
+  ></i>
+  {showProfileMenu && (
+    <div className="profile-dropdown">
+      <a href="/user/perfil" className="profile-option">Ver Perfil</a>
+      <button onClick={handleLogout} className="profile-option">Cerrar Sesión</button>
+    </div>
+  )}
+</div>
           </nav>
 
           <button
