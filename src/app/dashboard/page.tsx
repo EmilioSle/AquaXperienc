@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../config/supabase';
-import '../../styles/auth.styles/Global.css';
+import '../../styles/auth.styles/Global.css'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 export default function DashboardPage() {
@@ -52,6 +52,11 @@ export default function DashboardPage() {
       const currentUser = sessionData?.session?.user;
 
       if (!currentUser || sessionError) {
+        navigate('../../auth/login');
+        return;
+      }
+
+      if (currentUser.role === 'coach') {
         navigate('../../auth/login');
         return;
       }
