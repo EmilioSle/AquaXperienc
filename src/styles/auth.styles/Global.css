@@ -608,3 +608,40 @@ section {
 .profile-dropdown button:hover {
   background-color: #f0f0f0;
 }
+
+/* ------------------------------
+   14. mostrar password
+  */
+   .input-password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.password-input {
+  width: 100%;
+  padding-right: 2.5rem; 
+  padding-left: 0.5rem;
+  height: 40px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.password-input:focus {
+  border-color: #4285f4; 
+}
+
+.eye-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
