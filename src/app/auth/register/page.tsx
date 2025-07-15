@@ -44,6 +44,7 @@ export default function RegisterPage() {
         apellido: apellidos,
         telefono: celular,
         correo: email,
+        rol: 'USUARIO',
       },
     ])
 
