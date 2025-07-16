@@ -20,7 +20,7 @@ interface FormErrors {
   telefono?: string
 }
 
-export default function PerfilUsuario() {
+export default function PerfilEntrenador() {
   const [user, setUser] = useState<UserProfile | null>(null)
   const [formData, setFormData] = useState<UserProfile | null>(null)
   const [formErrors, setFormErrors] = useState<FormErrors>({})

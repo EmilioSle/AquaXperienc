@@ -1,40 +1,38 @@
-// src/components/Header.tsx
-import { useNavigate } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
-import { supabase } from '../config/supabase'
-import '../styles/auth.styles/Global.css'
-import '@fortawesome/fontawesome-free/css/all.min.css'
+// src/components/HeaderCoach.tsx
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState } from 'react';
+import { supabase } from '../../../config/supabase';
+import '../../../styles/auth.styles/Global.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
-export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [showSearch, setShowSearch] = useState(false)
-  const [query, setQuery] = useState('')
-  const [showProfileMenu, setShowProfileMenu] = useState(false)
-  const profileRef = useRef(null)
-  const navigate = useNavigate()
+export default function HeaderCoach() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
+  const [query, setQuery] = useState('');
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const profileRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await supabase.auth.signOut()
-    navigate('/auth/login')
-  }
+    await supabase.auth.signOut();
+    navigate('/auth/login');
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (profileRef.current && !(profileRef.current as any).contains(event.target)) {
-        setShowProfileMenu(false)
+        setShowProfileMenu(false);
       }
-    }
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [])
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <header className="main-header">
       <div className="header-content">
         <h2 className="logo">
-          <a href="/dashboard">AquaXperience</a>
+          <a href="/dashboard/coach">AquaXperience Coach</a>
         </h2>
 
         <nav className={`nav-menu ${menuOpen ? 'open' : ''}`}>
@@ -48,7 +46,7 @@ export default function Header() {
               <div className="search-dropdown">
                 <input
                   type="text"
-                  placeholder="Buscar experiencias..."
+                  placeholder="Buscar clases o alumnos..."
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   className="search-input"
@@ -56,9 +54,9 @@ export default function Header() {
               </div>
             )}
           </div>
-          <a href="#"><i className="fas fa-calendar-check"></i> Reservas</a>
-          <a href="#"><i className="fas fa-suitcase-rolling"></i> Alquiler</a>
-          <a href="#"><i className="fas fa-chalkboard-teacher"></i> Instructores</a>
+          <a href="/coach/clases"><i className="fas fa-calendar-alt"></i> Mis Clases</a>
+          <a href="/coach/alumnos"><i className="fas fa-users"></i> Alumnos</a>
+          <a href="/coach/estadisticas"><i className="fas fa-chart-pie"></i> Estadísticas</a>
 
           <div className="profile-menu-container" ref={profileRef}>
             <i
@@ -68,7 +66,7 @@ export default function Header() {
             ></i>
             {showProfileMenu && (
               <div className="profile-dropdown">
-                <a href="/user/perfil" className="profile-option">Ver Perfil</a>
+                <a href="/coach/perfil" className="profile-option">Ver Perfil</a>
                 <button onClick={handleLogout} className="profile-option">Cerrar Sesión</button>
               </div>
             )}
@@ -84,5 +82,5 @@ export default function Header() {
         </button>
       </div>
     </header>
-  )
+  );
 }

@@ -4,10 +4,11 @@ import HomePage from './app/Home/page'
 import LoginPage from './app/auth/login/page'
 import RegisterPage from './app/auth/register/page'
 import CoachDashboard from './app/coach/dashboard/page'
-import DashboardPage from './app/dashboard/page'
+import DashboardPage from './app/user/dashboard/page'
 import UpdatePassword from './app/auth/update-password/page'
 import ForgotPasswordPage from './app/auth/forget-password/page'
 import PerfilUsuario from './app/user/perfil/page'
+import PerfilEntrenador from './app/coach/perfil/page'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/dashboard/coach" element={<CoachDashboard />} />
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/user/perfil" element={<PerfilUsuario />} />
+        <Route path="/coach/perfil" element={<PerfilEntrenador />} />
         {/* Add more routes as needed */}
 
       </Routes>
