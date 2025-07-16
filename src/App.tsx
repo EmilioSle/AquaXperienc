@@ -7,6 +7,7 @@ import CoachDashboard from './app/coach/dashboard/page'
 import DashboardPage from './app/dashboard/page'
 import UpdatePassword from './app/auth/update-password/page'
 import ForgotPasswordPage from './app/auth/forget-password/page'
+import PerfilUsuario from './app/user/perfil/page'
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
         <Route path="/auth/forget-password" element={<ForgotPasswordPage />} />
         <Route path="/dashboard/coach" element={<CoachDashboard />} />
         <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/user/perfil" element={<DashboardPage />} />
+        <Route path="/user/perfil" element={<PerfilUsuario />} />
         {/* Add more routes as needed */}
 
       </Routes>
