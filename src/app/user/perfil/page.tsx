@@ -1,5 +1,6 @@
 'use client'
 
+import Header from '../../../components/Header'
 import { useEffect, useState } from 'react'
 import '../../../styles/auth.styles/Global.css'
 import { supabase } from '../../../config/supabase'
@@ -91,7 +92,6 @@ export default function PerfilUsuario() {
 
   const handleSubmit = async () => {
     if (!formData || !authId) return
-
     if (!validateForm()) return
 
     const correoCambiado = formData.correo !== user?.correo
@@ -135,180 +135,184 @@ export default function PerfilUsuario() {
   if (!user || !formData) return <p style={{ textAlign: 'center', marginTop: '2rem' }}>No se encontró información del usuario.</p>
 
   return (
-    <div
-      style={{
-        backgroundColor: 'var(--background)',
-        padding: '2rem',
-        minHeight: '100vh',
-        fontFamily: 'Segoe UI, sans-serif'
-      }}
-    >
+    <>
+      <Header />
+
       <div
         style={{
-          backgroundColor: 'white',
-          borderRadius: 'var(--border-radius)',
-          maxWidth: '600px',
-          margin: '0 auto',
-          padding: '2.5rem',
-          boxShadow: '0 6px 16px rgba(0,0,0,0.12)'
+          backgroundColor: 'var(--background)',
+          padding: '2rem',
+          minHeight: '100vh',
+          fontFamily: 'Segoe UI, sans-serif'
         }}
       >
-        <h2 style={{
-          color: 'var(--primary-dark)',
-          fontSize: '1.8rem',
-          marginBottom: '2rem',
-          borderBottom: '2px solid var(--accent-light)',
-          paddingBottom: '0.5rem'
-        }}>
-          Mi Perfil
-        </h2>
+        <div
+          style={{
+            backgroundColor: 'white',
+            borderRadius: 'var(--border-radius)',
+            maxWidth: '600px',
+            margin: '0 auto',
+            padding: '2.5rem',
+            boxShadow: '0 6px 16px rgba(0,0,0,0.12)'
+          }}
+        >
+          <h2 style={{
+            color: 'var(--primary-dark)',
+            fontSize: '1.8rem',
+            marginBottom: '2rem',
+            borderBottom: '2px solid var(--accent-light)',
+            paddingBottom: '0.5rem'
+          }}>
+            Mi Perfil
+          </h2>
 
-        <div className="grid gap-4">
-          <div>
-            <label><strong>Nombre:</strong></label>
-            {modoEdicion ? (
-              <>
-                <input
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  className="input-field"
-                />
-                {formErrors.nombre && <p style={{ color: 'red' }}>{formErrors.nombre}</p>}
-              </>
-            ) : (
-              <p>{user.nombre}</p>
-            )}
-          </div>
+          <div className="grid gap-4">
+            <div>
+              <label><strong>Nombre:</strong></label>
+              {modoEdicion ? (
+                <>
+                  <input
+                    name="nombre"
+                    value={formData.nombre}
+                    onChange={handleChange}
+                    className="input-field"
+                  />
+                  {formErrors.nombre && <p style={{ color: 'red' }}>{formErrors.nombre}</p>}
+                </>
+              ) : (
+                <p>{user.nombre}</p>
+              )}
+            </div>
 
-          <div>
-            <label><strong>Apellido:</strong></label>
-            {modoEdicion ? (
-              <>
-                <input
-                  name="apellido"
-                  value={formData.apellido}
-                  onChange={handleChange}
-                  className="input-field"
-                />
-                {formErrors.apellido && <p style={{ color: 'red' }}>{formErrors.apellido}</p>}
-              </>
-            ) : (
-              <p>{user.apellido}</p>
-            )}
-          </div>
+            <div>
+              <label><strong>Apellido:</strong></label>
+              {modoEdicion ? (
+                <>
+                  <input
+                    name="apellido"
+                    value={formData.apellido}
+                    onChange={handleChange}
+                    className="input-field"
+                  />
+                  {formErrors.apellido && <p style={{ color: 'red' }}>{formErrors.apellido}</p>}
+                </>
+              ) : (
+                <p>{user.apellido}</p>
+              )}
+            </div>
 
-          <div>
-            <label><strong>Correo:</strong></label>
-            {modoEdicion ? (
-              <>
-                <input
-                  name="correo"
-                  type="email"
-                  value={formData.correo}
-                  onChange={handleChange}
-                  className="input-field"
-                />
-                {formErrors.correo && <p style={{ color: 'red' }}>{formErrors.correo}</p>}
-              </>
-            ) : (
-              <p>{user.correo}</p>
-            )}
-          </div>
+            <div>
+              <label><strong>Correo:</strong></label>
+              {modoEdicion ? (
+                <>
+                  <input
+                    name="correo"
+                    type="email"
+                    value={formData.correo}
+                    onChange={handleChange}
+                    className="input-field"
+                  />
+                  {formErrors.correo && <p style={{ color: 'red' }}>{formErrors.correo}</p>}
+                </>
+              ) : (
+                <p>{user.correo}</p>
+              )}
+            </div>
 
-          <div>
-            <label><strong>Teléfono:</strong></label>
-            {modoEdicion ? (
-              <>
-                <input
-                  name="telefono"
-                  value={formData.telefono}
-                  onChange={handleChange}
-                  className="input-field"
-                />
-                {formErrors.telefono && <p style={{ color: 'red' }}>{formErrors.telefono}</p>}
-              </>
-            ) : (
-              <p>{user.telefono}</p>
-            )}
-          </div>
+            <div>
+              <label><strong>Teléfono:</strong></label>
+              {modoEdicion ? (
+                <>
+                  <input
+                    name="telefono"
+                    value={formData.telefono}
+                    onChange={handleChange}
+                    className="input-field"
+                  />
+                  {formErrors.telefono && <p style={{ color: 'red' }}>{formErrors.telefono}</p>}
+                </>
+              ) : (
+                <p>{user.telefono}</p>
+              )}
+            </div>
 
-          <div>
-            <label><strong>Rol:</strong></label>
-            <p>{user.rol}</p>
-          </div>
+            <div>
+              <label><strong>Rol:</strong></label>
+              <p>{user.rol}</p>
+            </div>
 
-          <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem' }}>
-            {modoEdicion ? (
-              <>
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  style={{
-                    backgroundColor: 'var(--primary-light)',
-                    color: 'white',
-                    padding: '0.5rem 1.2rem',
-                    border: 'none',
-                    borderRadius: 'var(--border-radius)',
-                    cursor: 'pointer'
-                  }}
-                >
-                  Guardar
-                </button>
+            <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem' }}>
+              {modoEdicion ? (
+                <>
+                  <button
+                    type="button"
+                    onClick={handleSubmit}
+                    style={{
+                      backgroundColor: 'var(--primary-light)',
+                      color: 'white',
+                      padding: '0.5rem 1.2rem',
+                      border: 'none',
+                      borderRadius: 'var(--border-radius)',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Guardar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setModoEdicion(false)
+                      setFormData(user)
+                      setFormErrors({})
+                      setMensaje(null)
+                    }}
+                    style={{
+                      backgroundColor: 'gray',
+                      color: 'white',
+                      padding: '0.5rem 1.2rem',
+                      border: 'none',
+                      borderRadius: 'var(--border-radius)',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    Cancelar
+                  </button>
+                </>
+              ) : (
                 <button
                   type="button"
                   onClick={() => {
-                    setModoEdicion(false)
-                    setFormData(user)
-                    setFormErrors({})
+                    setModoEdicion(true)
                     setMensaje(null)
                   }}
                   style={{
-                    backgroundColor: 'gray',
+                    backgroundColor: 'var(--primary-dark)',
                     color: 'white',
-                    padding: '0.5rem 1.2rem',
+                    padding: '0.5rem 1.5rem',
                     border: 'none',
                     borderRadius: 'var(--border-radius)',
                     cursor: 'pointer'
                   }}
                 >
-                  Cancelar
+                  Editar perfil
                 </button>
-              </>
-            ) : (
-              <button
-                type="button"
-                onClick={() => {
-                  setModoEdicion(true)
-                  setMensaje(null)
-                }}
+              )}
+            </div>
+
+            {mensaje && (
+              <p
                 style={{
-                  backgroundColor: 'var(--primary-dark)',
-                  color: 'white',
-                  padding: '0.5rem 1.5rem',
-                  border: 'none',
-                  borderRadius: 'var(--border-radius)',
-                  cursor: 'pointer'
+                  marginTop: '1rem',
+                  color: mensaje.includes('✅') ? 'green' : 'red',
+                  fontWeight: 'bold'
                 }}
               >
-                Editar perfil
-              </button>
+                {mensaje}
+              </p>
             )}
           </div>
-
-          {mensaje && (
-            <p
-              style={{
-                marginTop: '1rem',
-                color: mensaje.includes('✅') ? 'green' : 'red',
-                fontWeight: 'bold'
-              }}
-            >
-              {mensaje}
-            </p>
-          )}
         </div>
       </div>
-    </div>
+    </>
   )
 }
